@@ -54,7 +54,8 @@ class Extension extends fastpanel_core_1.Extensions.ExtensionDefines {
      */
     async startup() {
         if (this.di.has('socket')) {
-            /* Fire http startup event. */
+            /* Fire event. */
+            this.events.emit('socket:getActions', this.socket);
             this.events.emit('socket:startup', this.socket);
         }
     }

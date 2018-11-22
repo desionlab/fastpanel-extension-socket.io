@@ -56,7 +56,8 @@ export class Extension extends Extensions.ExtensionDefines {
    */
   async startup () : Promise<any> {
     if (this.di.has('socket')) {
-      /* Fire http startup event. */
+      /* Fire event. */
+      this.events.emit('socket:getActions', this.socket);
       this.events.emit('socket:startup', this.socket);
     }
   }
