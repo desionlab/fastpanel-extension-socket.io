@@ -41,6 +41,7 @@
     "@types/node": "^10.12.10",
     "@types/socket.io": "^2.1.0",
     "@types/socket.io-redis": "^1.0.25",
+    "@types/vorpal": "^1.11.0",
     "chai": "^4.2.0",
     "fastpanel-core": "github:desionlab/fastpanel-core#develop",
     "mocha": "^5.2.0",

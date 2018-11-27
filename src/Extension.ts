@@ -6,6 +6,7 @@
  * @license   MIT
  */
 
+import Vorpal from 'vorpal';
 import SocketIO from 'socket.io';
 const SocketIOEmitter = require('socket.io-emitter');
 import SocketIORedisAdapter from 'socket.io-redis';
@@ -49,6 +50,11 @@ export class Extension extends Extensions.ExtensionDefines {
         return socket;
       }, true);
     }
+
+    /* Registered cli commands. */
+    this.events.once('cli:getCommands', (cli: Vorpal) => {
+      console.log('cli:getCommands');
+    });
   }
   
   /**
