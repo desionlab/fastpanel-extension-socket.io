@@ -26,14 +26,7 @@ class Extension extends fastpanel_core_1.Extensions.ExtensionDefines {
      * Registers a service provider.
      */
     async register() {
-        if (this.context instanceof fastpanel_core_1.Cli.Handler) {
-            /* Registration websocket emitter. */
-            this.di.set('socket', (container) => {
-                let socket = SocketIOEmitter(container.get('redis', this.config.get('Extensions/SocketIO.redis', null)));
-                return socket;
-            }, true);
-        }
-        else if (this.context instanceof fastpanel_core_1.Cluster.Handler) {
+        if (this.context instanceof fastpanel_core_1.Cluster.Handler) {
             /* Registration websocket server. */
             this.di.set('socket', (container) => {
                 /* Create server. */
@@ -48,6 +41,13 @@ class Extension extends fastpanel_core_1.Extensions.ExtensionDefines {
                 return socket;
             }, true);
         }
+        else {
+            /* Registration websocket emitter. */
+            this.di.set('socket', (container) => {
+                let socket = SocketIOEmitter(container.get('redis', this.config.get('Extensions/SocketIO.redis', null)));
+                return socket;
+            }, true);
+        }
         /* Registered cli commands. */
         this.events.once('cli:getCommands', (cli) => {
             console.log('cli:getCommands');
@@ -57,11 +57,14 @@ class Extension extends fastpanel_core_1.Extensions.ExtensionDefines {
      * Startup a service provider.
      */
     async startup() {
-        if (this.di.has('socket')) {
+        if (this.context instanceof fastpanel_core_1.Cluster.Handler) {
             /* Fire event. */
             this.events.emit('socket:getActions', this.socket);
-            this.events.emit('socket:startup', this.socket);
         }
+        else {
+        }
+        /* Fire event. */
+        this.events.emit('socket:startup', this.socket);
     }
 }
 exports.Extension = Extension;
