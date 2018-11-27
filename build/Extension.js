@@ -57,11 +57,11 @@ class Extension extends fastpanel_core_1.Extensions.ExtensionDefines {
      * Startup a service provider.
      */
     async startup() {
+        /* Check context. */
         if (this.context instanceof fastpanel_core_1.Cluster.Handler) {
             /* Fire event. */
+            this.events.emit('socket:getMiddleware', this.socket);
             this.events.emit('socket:getActions', this.socket);
-        }
-        else {
         }
         /* Fire event. */
         this.events.emit('socket:startup', this.socket);

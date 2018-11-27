@@ -10,7 +10,7 @@ import Vorpal from 'vorpal';
 import SocketIO from 'socket.io';
 const SocketIOEmitter = require('socket.io-emitter');
 import SocketIORedisAdapter from 'socket.io-redis';
-import { Cli, Cluster, Di, Extensions } from 'fastpanel-core';
+import { Cluster, Di, Extensions } from 'fastpanel-core';
 
 /**
  * Class Extension
@@ -61,11 +61,11 @@ export class Extension extends Extensions.ExtensionDefines {
    * Startup a service provider.
    */
   async startup () : Promise<any> {
+    /* Check context. */
     if (this.context instanceof Cluster.Handler) {
       /* Fire event. */
+      this.events.emit('socket:getMiddleware', this.socket);
       this.events.emit('socket:getActions', this.socket);
-    } else {
-
     }
     
     /* Fire event. */
