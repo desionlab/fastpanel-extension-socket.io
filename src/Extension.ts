@@ -52,9 +52,7 @@ export class Extension extends Extensions.ExtensionDefines {
     }
 
     /* Registered cli commands. */
-    this.events.once('cli:getCommands', (cli: Vorpal) => {
-      console.log('cli:getCommands');
-    });
+    this.events.once('cli:getCommands', (cli: Vorpal) => {});
   }
   
   /**
