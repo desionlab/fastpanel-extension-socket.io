@@ -48,8 +48,10 @@ class Extension extends fastpanel_core_1.Extensions.ExtensionDefines {
                 return socket;
             }, true);
         }
+        /* Install and configure the basic components of the system. */
+        this.events.once('app:setup', async (app) => { });
         /* Registered cli commands. */
-        this.events.once('cli:getCommands', (cli) => { });
+        this.events.once('cli:getCommands', async (cli) => { });
     }
     /**
      * Startup a service provider.
