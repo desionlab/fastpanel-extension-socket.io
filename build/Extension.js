@@ -13,7 +13,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const socket_io_1 = __importDefault(require("socket.io"));
 const SocketIOEmitter = require('socket.io-emitter');
 const socket_io_redis_1 = __importDefault(require("socket.io-redis"));
-const fastpanel_core_1 = require("fastpanel-core");
+const core_1 = require("@fastpanel/core");
 /**
  * Class Extension
  *
@@ -21,12 +21,12 @@ const fastpanel_core_1 = require("fastpanel-core");
  *
  * @version 1.0.0
  */
-class Extension extends fastpanel_core_1.Extensions.ExtensionDefines {
+class Extension extends core_1.Extensions.ExtensionDefines {
     /**
      * Registers a service provider.
      */
     async register() {
-        if (this.context instanceof fastpanel_core_1.Cluster.Handler) {
+        if (this.context instanceof core_1.Cluster.Handler) {
             /* Registration websocket server. */
             this.di.set('socket', (container) => {
                 /* Create server. */
@@ -58,7 +58,7 @@ class Extension extends fastpanel_core_1.Extensions.ExtensionDefines {
      */
     async startup() {
         /* Check context. */
-        if (this.context instanceof fastpanel_core_1.Cluster.Handler) {
+        if (this.context instanceof core_1.Cluster.Handler) {
             /* Fire event. */
             this.events.emit('socket:getMiddleware', this.socket);
             this.events.emit('socket:getActions', this.socket);
