@@ -10,8 +10,7 @@ import Vorpal from 'vorpal';
 import SocketIO from 'socket.io';
 const SocketIOEmitter = require('socket.io-emitter');
 import SocketIORedisAdapter from 'socket.io-redis';
-import { Cluster, Di, Extensions } from '@fastpanel/core';
-import { SetupTaskDefinesMethod } from '@fastpanel/core/build/Commands';
+import { Cli, Cluster, Di, Extensions } from '@fastpanel/core';
 
 /**
  * Class Extension
@@ -52,13 +51,13 @@ export class Extension extends Extensions.ExtensionDefines {
       }, true);
     }
     
-    /* Install and configure the basic components of the system. */
-    this.events.on('app:getSetupTasks', async (list: Array<SetupTaskDefinesMethod>) => {
-      list.push(async (command: Vorpal.CommandInstance, args?: any) => {});
-    });
-
     /* Registered cli commands. */
     this.events.once('cli:getCommands', async (cli: Vorpal) => {});
+
+    /* Install and configure the basic components of the system. */
+    this.events.on('app:getSetupSubscriptions', (list: Array<Cli.CommandSubscriptionDefines>) => {
+      list.push(async (command: Vorpal.CommandInstance, args?: any) => {});
+    });
   }
   
   /**
