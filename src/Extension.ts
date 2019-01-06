@@ -10,7 +10,7 @@ import Vorpal from 'vorpal';
 import SocketIO from 'socket.io';
 const SocketIOEmitter = require('socket.io-emitter');
 import SocketIORedisAdapter from 'socket.io-redis';
-import { Cli, Cluster, Di, Extensions } from '@fastpanel/core';
+import { Cli, Di, Extensions, Worker } from '@fastpanel/core';
 
 /**
  * Class Extension
@@ -25,7 +25,7 @@ export class Extension extends Extensions.ExtensionDefines {
    * Registers a service provider.
    */
   async register () : Promise<any> {
-    if (this.context instanceof Cluster.Handler) {
+    if (this.context instanceof Worker.Handler) {
       /* Registration websocket server. */
       this.di.set('socket', (container: Di.Container) => {
         /* Create server. */
@@ -65,7 +65,7 @@ export class Extension extends Extensions.ExtensionDefines {
    */
   async startup () : Promise<any> {
     /* Check context. */
-    if (this.context instanceof Cluster.Handler) {
+    if (this.context instanceof Worker.Handler) {
       /* Fire event. */
       this.events.emit('socket:getMiddleware', this.socket);
       this.events.emit('socket:getActions', this.socket);

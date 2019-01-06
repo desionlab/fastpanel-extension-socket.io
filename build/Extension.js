@@ -26,7 +26,7 @@ class Extension extends core_1.Extensions.ExtensionDefines {
      * Registers a service provider.
      */
     async register() {
-        if (this.context instanceof core_1.Cluster.Handler) {
+        if (this.context instanceof core_1.Worker.Handler) {
             /* Registration websocket server. */
             this.di.set('socket', (container) => {
                 /* Create server. */
@@ -60,7 +60,7 @@ class Extension extends core_1.Extensions.ExtensionDefines {
      */
     async startup() {
         /* Check context. */
-        if (this.context instanceof core_1.Cluster.Handler) {
+        if (this.context instanceof core_1.Worker.Handler) {
             /* Fire event. */
             this.events.emit('socket:getMiddleware', this.socket);
             this.events.emit('socket:getActions', this.socket);
