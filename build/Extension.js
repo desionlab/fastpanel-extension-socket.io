@@ -3,7 +3,7 @@
  * Extension.ts
  *
  * @author    Desionlab <fenixphp@gmail.com>
- * @copyright 2014 - 2018 Desionlab
+ * @copyright 2014 - 2019 Desionlab
  * @license   MIT
  */
 var __importDefault = (this && this.__importDefault) || function (mod) {
@@ -49,10 +49,9 @@ class Extension extends core_1.Extensions.ExtensionDefines {
             }, true);
         }
         /* Registered cli commands. */
-        this.events.once('cli:getCommands', async (cli) => { });
-        /* Install and configure the basic components of the system. */
-        this.events.on('app:getSetupSubscriptions', (list) => {
-            list.push(async (command, args) => { });
+        this.events.once('cli:getCommands', async (cli) => {
+            const { Setup } = require('./Commands/Setup');
+            await (new Setup(this.di)).initialize();
         });
     }
     /**

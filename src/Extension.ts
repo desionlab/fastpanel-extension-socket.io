@@ -2,11 +2,11 @@
  * Extension.ts
  * 
  * @author    Desionlab <fenixphp@gmail.com>
- * @copyright 2014 - 2018 Desionlab
+ * @copyright 2014 - 2019 Desionlab
  * @license   MIT
  */
 
-import Vorpal from 'vorpal';
+import Caporal from 'caporal';
 import SocketIO from 'socket.io';
 const SocketIOEmitter = require('socket.io-emitter');
 import SocketIORedisAdapter from 'socket.io-redis';
@@ -52,11 +52,9 @@ export class Extension extends Extensions.ExtensionDefines {
     }
     
     /* Registered cli commands. */
-    this.events.once('cli:getCommands', async (cli: Vorpal) => {});
-
-    /* Install and configure the basic components of the system. */
-    this.events.on('app:getSetupSubscriptions', (list: Array<Cli.CommandSubscriptionDefines>) => {
-      list.push(async (command: Vorpal.CommandInstance, args?: any) => {});
+    this.events.once('cli:getCommands', async (cli: Caporal) => {
+      const { Setup } = require('./Commands/Setup');
+      await (new Setup(this.di)).initialize();
     });
   }
   
