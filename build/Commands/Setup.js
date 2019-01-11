@@ -17,12 +17,13 @@ class Setup extends core_1.Cli.CommandDefines {
     /**
      * Initialize a commands provider.
      */
-    async initialize() {
+    initialize() {
         this.cli
-            .command('@fastpanel/socket.io setup', 'Install socket.io components.')
-            .option('-f, --force', 'Forced reconfiguration of components.')
+            .command('@fastpanel/socket.io setup', 'Configure socket.io components.')
             .option('-e, --env', 'Save as current environment settings.')
+            .option('-f, --force', 'Forced command running.')
             .option('-y, --yes', 'Assume yes if prompted.')
+            .visible(false)
             .action((args, options, logger) => {
             return new Promise(async (resolve, reject) => {
                 logger.debug('@fastpanel/socket.io setup');
