@@ -19,7 +19,7 @@ class Setup extends core_1.Cli.CommandDefines {
      */
     initialize() {
         this.cli
-            .command('@fastpanel/socket.io setup', 'Configure socket.io components.')
+            .command('fastpanel/socket.io setup', 'Configure socket.io components.')
             .option('-e, --env', 'Save as current environment settings.')
             .option('-f, --force', 'Forced command running.')
             .option('-y, --yes', 'Assume yes if prompted.')
