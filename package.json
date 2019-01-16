@@ -1,6 +1,6 @@
 {
   "name": "@fastpanel/socket.io",
-  "version": "0.0.1",
+  "version": "0.1.0-alpha.1",
   "description": "Extension to work with the \"WebSocket\" protocol.",
   "author": "Desionlab <fenixphp@gmail.com>",
   "main": "build/index.js",
@@ -37,7 +37,7 @@
     "socket.io-redis": "^5.2.0"
   },
   "devDependencies": {
-    "@fastpanel/core": "github:fastpanel/core#develop",
+    "@fastpanel/core": "^0.1.0-alpha.1",
     "@types/chai": "^4.1.7",
     "@types/inquirer": "0.0.43",
     "@types/mocha": "^5.2.5",
